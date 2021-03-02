@@ -1,0 +1,35 @@
+﻿@model HashSet<string>
+
+<div class="jumbotron">
+	<h1>Awesome Blob Web App</h1>
+	<p class="lead">This sample app shows how to leverage the Azure.Storage.Blobs NuGet package and DefaultAzureCredential to upload, list, and download files in blob.</p>
+	<p><a href="https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h2>File Upload</h2>
+		<form enctype="multipart/form-data" method="post">
+			<dl>
+				<dt>
+					<label asp-for="file"></label>
+				</dt>
+				<dd>
+					<input name="file" type="file">
+					<span asp-validation-for="FileUpload.FormFile"></span>
+				</dd>
+			</dl>
+			<input asp-page-handler="Upload" class="btn" type="submit" value="Upload" />
+		</form>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h2>Existing Files</h2>
+		<ul>
+			@foreach (var item in Model)
+			{
+				<li>@Html.ActionLink(item, "Download", new { fileName = item })</li>
+			}
+		</ul>
+	</div>
+</div>
